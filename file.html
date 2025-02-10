@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f8f9fa;
+        }
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .menu-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            margin-top: 10px;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Food Menu</h1>
+    <input type="text" id="search" placeholder="Search food..." onkeyup="filterMenu()">
+    <div class="menu" id="menu">
+        <!-- Food items will be added dynamically here -->
+    </div>
+
+    <script>
+        const menuItems = [
+            { name: "Pizza", category: "Main Course" },
+            { name: "Burger", category: "Snacks" },
+            { name: "Pasta", category: "Main Course" },
+            { name: "Ice Cream", category: "Dessert" },
+            { name: "Salad", category: "Appetizer" }
+        ];
+
+        function displayMenu(items) {
+            const menuDiv = document.getElementById("menu");
+            menuDiv.innerHTML = "";
+            items.forEach(item => {
+                let div = document.createElement("div");
+                div.className = "menu-item";
+                div.innerHTML = `<h3>${item.name}</h3><p>${item.category}</p>`;
+                menuDiv.appendChild(div);
+            });
+        }
+
+        function filterMenu() {
+            const searchValue = document.getElementById("search").value.toLowerCase();
+            const filteredItems = menuItems.filter(item => item.name.toLowerCase().includes(searchValue));
+            displayMenu(filteredItems);
+        }
+
+        displayMenu(menuItems);
+    </script>
+</body>
+</html>
